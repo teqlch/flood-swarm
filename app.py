@@ -8,15 +8,33 @@ import pandas as pd
 
 # 1. Настройка страницы под ПК и мобильные устройства
 st.set_page_config(
-    page_title="FLOOD SWARM SYSTEM",
+    page_title="Flood Swarm Simulation System",
     page_icon="🌊",
     layout="wide"
 )
 
 # Стилизация под темную тему
+# Полное скрытие копирайта Streamlit, кнопки Manage app и меню
 st.markdown("""
     <style>
+    /* Главный фон */
     .stApp { background-color: #0a0e14; }
+    
+    /* Скрываем футер Streamlit ("Made with Streamlit") */
+    footer { visibility: hidden; display: none !important; }
+    
+    /* Скрываем верхнюю полосу, бургер-меню и кнопку GitHub */
+    #MainMenu { visibility: hidden; display: none !important; }
+    header { visibility: hidden; display: none !important; }
+    
+    /* Скрываем кнопку Manage app (внизу справа) */
+    [data-testid="stStatusWidget"] { visibility: hidden; display: none !important; }
+    div[class*="viewerBadge"] { visibility: hidden; display: none !important; }
+    
+    /* Скрываем иконку короны / подписки на мобильных устройствах */
+    .stActionButton { display: none !important; }
+    
+    /* Кастомная стилизация метрик */
     div[data-testid="stMetricValue"] { color: #00ffcc; font-family: monospace; }
     </style>
 """, unsafe_allow_html=True)
