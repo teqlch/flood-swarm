@@ -6,29 +6,41 @@ import random
 import time
 import pandas as pd
 
+import streamlit as st
+
 st.set_page_config(
     page_title="Flood Swarm Simulation System",
     page_icon="🌊",
-    layout="wide",
-    initial_sidebar_state="expanded" # Автоматически открывает сайдбар на смартфонах!
+    layout="wide"
 )
 
+# Кастомный CSS для скрытия брендинга и сохранения меню управления
 st.markdown("""
     <style>
-    /* 1. Фон приложения */
+    /* 1. Главный фон */
     .stApp { background-color: #0a0e14 !important; }
 
-    /* 2. Полное скрытие всех системных плашек и подвалов */
+    /* 2. Скрытие футера (Made with Streamlit / Hosted with Streamlit) */
     footer, [data-testid="stFooter"], div[class*="stAppFooter"], 
-    div[class*="viewerBadge"], [data-testid="stStatusWidget"],
-    header [data-testid="stToolbar"] {
+    div[class*="viewerBadge"], [data-testid="stStatusWidget"] {
         display: none !important;
         visibility: hidden !important;
-        height: 0px !important;
     }
 
-    /* 3. Гарантируем показ кнопки открытия боковой панели (стрелочки >) */
-    [data-testid="collapsedControl"], [data-testid="stSidebarCollapseButton"] {
+    /* 3. Прозрачный хедер (чтобы не перекрывал интерфейс) */
+    header[data-testid="stHeader"] {
+        background: transparent !important;
+    }
+
+    /* 4. Скрытие правого меню (три точки / Настройки) */
+    #MainMenu, header [data-testid="stToolbar"] {
+        display: none !important;
+        visibility: hidden !important;
+    }
+
+    /* 5. Кнопка открытия боковой панели (стрелка >) */
+    [data-testid="stSidebarCollapseButton"], 
+    [data-testid="collapsedControl"] {
         display: flex !important;
         visibility: visible !important;
         color: #00ffcc !important;
@@ -38,7 +50,7 @@ st.markdown("""
         z-index: 999999 !important;
     }
 
-    /* Стилизация цифр в метриках */
+    /* Стилизация метрик */
     div[data-testid="stMetricValue"] { color: #00ffcc; font-family: monospace; }
     </style>
 """, unsafe_allow_html=True)
