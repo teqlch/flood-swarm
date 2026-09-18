@@ -13,28 +13,32 @@ st.set_page_config(
     initial_sidebar_state="expanded" # Автоматически открывает сайдбар на смартфонах!
 )
 
-# Перекрытие системных элементов
 st.markdown("""
     <style>
-    /* 1. Главный фон */
-    .stApp { 
-        background-color: #0a0e14 !important; 
-    }
+    /* 1. Фон приложения */
+    .stApp { background-color: #0a0e14 !important; }
 
-    /* 2. Жесткое скрытие подвала (Footer) */
-    footer, [data-testid="stFooter"], div[class*="stAppFooter"] {
+    /* 2. Полное скрытие всех системных плашек и подвалов */
+    footer, [data-testid="stFooter"], div[class*="stAppFooter"], 
+    div[class*="viewerBadge"], [data-testid="stStatusWidget"],
+    header [data-testid="stToolbar"] {
         display: none !important;
-        opacity: 0 !important;
-        height: 0 !important;
-        pointer-events: none !important;
+        visibility: hidden !important;
+        height: 0px !important;
     }
 
-    /* 3. Гарантируем открытие сайдбара */
-    [data-testid="stSidebar"] {
+    /* 3. Гарантируем показ кнопки открытия боковой панели (стрелочки >) */
+    [data-testid="collapsedControl"], [data-testid="stSidebarCollapseButton"] {
+        display: flex !important;
+        visibility: visible !important;
+        color: #00ffcc !important;
         background-color: #121820 !important;
+        border: 1px solid #00ffcc !important;
+        border-radius: 6px !important;
+        z-index: 999999 !important;
     }
-    
-    /* Стилизация метрик */
+
+    /* Стилизация цифр в метриках */
     div[data-testid="stMetricValue"] { color: #00ffcc; font-family: monospace; }
     </style>
 """, unsafe_allow_html=True)
