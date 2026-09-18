@@ -14,47 +14,6 @@ st.set_page_config(
     layout="wide"
 )
 
-# Кастомный CSS для скрытия брендинга и сохранения меню управления
-st.markdown("""
-    <style>
-    /* 1. Главный фон */
-    .stApp { background-color: #0a0e14 !important; }
-
-    /* 2. Скрытие футера (Made with Streamlit / Hosted with Streamlit) */
-    footer, [data-testid="stFooter"], div[class*="stAppFooter"], 
-    div[class*="viewerBadge"], [data-testid="stStatusWidget"] {
-        display: none !important;
-        visibility: hidden !important;
-    }
-
-    /* 3. Прозрачный хедер (чтобы не перекрывал интерфейс) */
-    header[data-testid="stHeader"] {
-        background: transparent !important;
-    }
-
-    /* 4. Скрытие правого меню (три точки / Настройки) */
-    #MainMenu, header [data-testid="stToolbar"] {
-        display: none !important;
-        visibility: hidden !important;
-    }
-
-    /* 5. Кнопка открытия боковой панели (стрелка >) */
-    [data-testid="stSidebarCollapseButton"], 
-    [data-testid="collapsedControl"] {
-        display: flex !important;
-        visibility: visible !important;
-        color: #00ffcc !important;
-        background-color: #121820 !important;
-        border: 1px solid #00ffcc !important;
-        border-radius: 6px !important;
-        z-index: 999999 !important;
-    }
-
-    /* Стилизация метрик */
-    div[data-testid="stMetricValue"] { color: #00ffcc; font-family: monospace; }
-    </style>
-""", unsafe_allow_html=True)
-
 # 2. Класс агента (сохранен 1 в 1)
 class Agent:
     def __init__(self, agent_id, x, y):
