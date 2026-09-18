@@ -15,35 +15,48 @@ st.set_page_config(
 
 # Стилизация под темную тему
 # Полное скрытие копирайта Streamlit, кнопки Manage app и меню
+# Настройка CSS: скрываем плашку Streamlit и гарантируем видимость боковой панели
 st.markdown("""
     <style>
     /* 1. Главный фон */
-    .stApp { background-color: #0a0e14; }
-
-    /* 2. Скрываем только нижнюю красную/черную плашку (Hosted with Streamlit & Created by) */
-    footer { display: none !important; }
-    div[class*="stAppFooter"] { display: none !important; }
-    div[data-testid="stStatusWidget"] { display: none !important; }
-    div[class*="viewerBadge"] { display: none !important; }
-    
-    /* Скрываем нижний банер на мобилках */
-    iframe[title="streamlit_app"] { margin-bottom: 0px !important; }
-    
-    /* 3. ВОЗВРАЩАЕМ кнопку открытия бокового меню (стрелочку >) */
-    [data-testid="stSidebarNav"] { display: block !important; }
-    [data-testid="collapsedControl"] { 
-        display: flex !important; 
-        visibility: visible !important;
-        color: #00ffcc !important;
-        background-color: #121820 !important;
-        border-radius: 5px;
+    .stApp { 
+        background-color: #0a0e14; 
     }
 
-    /* 4. Скрытие верхнего правого меню (три точки), но НЕ стрелки бокового меню */
+    /* 2. Полное скрытие нижней плашки Streamlit (Hosted with Streamlit / Created by) */
+    footer { display: none !important; visibility: hidden !important; }
+    [data-testid="stFooter"] { display: none !important; visibility: hidden !important; }
+    div[class*="stAppFooter"] { display: none !important; visibility: hidden !important; }
+    div[class*="viewerBadge"] { display: none !important; visibility: hidden !important; }
+    [data-testid="stStatusWidget"] { display: none !important; visibility: hidden !important; }
+    
+    /* Дополнительно убираем отступ снизу под скрытый футер */
+    .stApp > footer { display: none !important; }
+
+    /* 3. Гарантируем видимость кнопки открытия боковой панели (стрелочки >) на мобильных */
+    [data-testid="stSidebarCollapseButton"] {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        color: #00ffcc !important;
+        z-index: 999999 !important;
+    }
+    
+    [data-testid="collapsedControl"] {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        background-color: #121820 !important;
+        border: 1px solid #00ffcc !important;
+        border-radius: 6px !important;
+        z-index: 999999 !important;
+    }
+
+    /* 4. Скрываем только верхнее меню с настройками (три точки) */
     #MainMenu { visibility: hidden !important; }
     header [data-testid="stToolbar"] { visibility: hidden !important; }
 
-    /* Стилизация метрик */
+    /* Стилизация чисел в метриках */
     div[data-testid="stMetricValue"] { color: #00ffcc; font-family: monospace; }
     </style>
 """, unsafe_allow_html=True)
