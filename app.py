@@ -6,57 +6,35 @@ import random
 import time
 import pandas as pd
 
-# 1. Настройка страницы под ПК и мобильные устройства
 st.set_page_config(
     page_title="Flood Swarm Simulation System",
     page_icon="🌊",
-    layout="wide"
+    layout="wide",
+    initial_sidebar_state="expanded" # Автоматически открывает сайдбар на смартфонах!
 )
 
-# Стилизация под темную тему
-# Полное скрытие копирайта Streamlit, кнопки Manage app и меню
-# Настройка CSS: скрываем плашку Streamlit и гарантируем видимость боковой панели
+# Перекрытие системных элементов
 st.markdown("""
     <style>
     /* 1. Главный фон */
     .stApp { 
-        background-color: #0a0e14; 
+        background-color: #0a0e14 !important; 
     }
 
-    /* 2. Полное скрытие нижней плашки Streamlit (Hosted with Streamlit / Created by) */
-    footer { display: none !important; visibility: hidden !important; }
-    [data-testid="stFooter"] { display: none !important; visibility: hidden !important; }
-    div[class*="stAppFooter"] { display: none !important; visibility: hidden !important; }
-    div[class*="viewerBadge"] { display: none !important; visibility: hidden !important; }
-    [data-testid="stStatusWidget"] { display: none !important; visibility: hidden !important; }
-    
-    /* Дополнительно убираем отступ снизу под скрытый футер */
-    .stApp > footer { display: none !important; }
-
-    /* 3. Гарантируем видимость кнопки открытия боковой панели (стрелочки >) на мобильных */
-    [data-testid="stSidebarCollapseButton"] {
-        display: flex !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        color: #00ffcc !important;
-        z-index: 999999 !important;
+    /* 2. Жесткое скрытие подвала (Footer) */
+    footer, [data-testid="stFooter"], div[class*="stAppFooter"] {
+        display: none !important;
+        opacity: 0 !important;
+        height: 0 !important;
+        pointer-events: none !important;
     }
-    
-    [data-testid="collapsedControl"] {
-        display: flex !important;
-        visibility: visible !important;
-        opacity: 1 !important;
+
+    /* 3. Гарантируем открытие сайдбара */
+    [data-testid="stSidebar"] {
         background-color: #121820 !important;
-        border: 1px solid #00ffcc !important;
-        border-radius: 6px !important;
-        z-index: 999999 !important;
     }
-
-    /* 4. Скрываем только верхнее меню с настройками (три точки) */
-    #MainMenu { visibility: hidden !important; }
-    header [data-testid="stToolbar"] { visibility: hidden !important; }
-
-    /* Стилизация чисел в метриках */
+    
+    /* Стилизация метрик */
     div[data-testid="stMetricValue"] { color: #00ffcc; font-family: monospace; }
     </style>
 """, unsafe_allow_html=True)
